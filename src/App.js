@@ -5,7 +5,7 @@ import Person from './Person/Person'
 class App extends Component {
   state = {
     persons: [
-      { name: 'Max', age: 28 },
+      { name: 'Maximiliam', age: 28 },
       { name: 'Jhon', age: 25 },
       { name: 'Stephy', age: 26 },
     ],
@@ -36,6 +36,7 @@ class App extends Component {
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons
     this.setState({showPersons: !doesShow})
+    console.log('estado del contenedor:', doesShow)
   }
 
   deletePersonHandler = (personId) => {
@@ -74,7 +75,7 @@ class App extends Component {
         <p>This is really working!</p>
         <button 
           style={style}
-          onClick={this.togglePersonsHandler}>switch name
+          onClick={this.togglePersonsHandler}>switch name mauri
         </button>
         {persons}
       </div>
