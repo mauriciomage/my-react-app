@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NewExpense from './components/NewExpense/NewExpense';
 import Expenses from './components/Expenses/Expenses';
 
 class App extends Component {
@@ -12,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h2>This is really working!</h2>
+        <NewExpense />
         <Expenses items={this.expenses} />
       </div>
     );
