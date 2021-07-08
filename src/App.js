@@ -10,8 +10,6 @@ const DUMMY_EXPENSES = [
   { id: 'e4', title: 'Muni', amount: 1.89, date: new Date(2020, 8, 1) }
 ];
 
-
-
 const App = () => {
 
   useEffect(() => {
@@ -19,6 +17,7 @@ const App = () => {
   }, []);
 
   const [expenses, setExpenses] = useState({});
+  const [expenseToEdit, setExpenseToEdit] = useState({});
 
   const getexpenses = async () => {
     await api.getAllExpenses().then(expenses => {
@@ -40,8 +39,8 @@ const App = () => {
     });
   }
 
-  const editExpenseHandler = async (expense) => {
-   //  console.log(expense);
+  const editExpenseHandler =  (expense) => {
+    setExpenseToEdit({expense: expense});
   }
 
 
@@ -49,7 +48,7 @@ const App = () => {
     <div>
       <NewExpense 
         onAddExpense={addExpenseHandler}
-        onFormDataFill={editExpenseHandler} />
+        expenseToEdit={expenseToEdit} />
       <Expenses 
         items={expenses}
         deleteExpense={deleteExpenseHandler}
