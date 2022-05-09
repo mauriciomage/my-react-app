@@ -2,17 +2,19 @@ import React from 'react';
 import './ExpenseItem.css';
 import ExpenseDate from'./ExpenseDate';
 import Card from '../UI/Card'
+import { Icon } from '@material-ui/core';
 
 const ExpenseItem = (props) => {
   return (
     <Card className="expense-item">
-      <ExpenseDate date={props.date} />
       <div className="expense-item__description">
+        <div className="expense-item__price">€{ props.amount }</div>
         <h2>{props.title}</h2>
-        <div className="expense-item__price">${ props.amount }</div>
-        <button className="expense-item__delete" onClick={() => props.deleteExpense(props.id)}>Delete</button>
-        <button className="expense-item__edit" onClick={() => props.editExpense(props)}>Edit</button>
       </div>
+      <ExpenseDate date={props.date} />
+      {/* <button className="expense-item__button" onClick={() => props.deleteExpense(props.id)}>
+        Remove
+      </button> */}
     </Card>
   );
 }

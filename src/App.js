@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react';
 import NewExpense from './components/NewExpense/NewExpense';
 import Expenses from './components/Expenses/Expenses';
 import api from './api'
-
-const DUMMY_EXPENSES = [
-  { id: 'e1', title: 'Cuota La Salle', amount: 681, date: new Date(2021, 3, 14) },
-  { id: 'e2', title: 'Mes Piso', amount: 450, date: new Date(2021, 3, 14) },
-  { id: 'e3', title: 'Aguas', amount: 22.45, date: new Date(2020, 6, 3) },
-  { id: 'e4', title: 'Muni', amount: 1.89, date: new Date(2020, 8, 1) }
-];
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const App = () => {
 
@@ -17,7 +14,6 @@ const App = () => {
   }, []);
 
   const [expenses, setExpenses] = useState({});
-  const [expenseToEdit, setExpenseToEdit] = useState({});
 
   const getexpenses = async () => {
     await api.getAllExpenses().then(expenses => {
@@ -27,32 +23,53 @@ const App = () => {
 
   const addExpenseHandler = async (expense) => {
     await api.insertExpense(expense).then(res => {
+      toast.success("New Expense created!", {autoClose: 1500, pauseOnHover: false, draggable: false});
       getexpenses(); 
     });
   }
 
-  
-
   const deleteExpenseHandler = async (expenseId) => {
-    await api.deleteExpenseById(expenseId).then(expense => {
-      getexpenses();
+    await confirmAlert({
+      title: 'You are going to delete the expense. Are you sure?',
+      message: '',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+              api.deleteExpenseById(expenseId).then(() => {
+                toast.dark("Deleted!", { autoClose: 1500, pauseOnHover: false, draggable: false });
+                getexpenses();
+              });
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => {
+            console.log('canceled');
+          }
+        }
+      ]
     });
   }
-
-  const editExpenseHandler =  (expense) => {
-    setExpenseToEdit({expense: expense});
-  }
-
-
+ 
   return (
     <div>
       <NewExpense 
-        onAddExpense={addExpenseHandler}
-        expenseToEdit={expenseToEdit} />
+        onAddExpense={addExpenseHandler}/>
       <Expenses 
         items={expenses}
-        deleteExpense={deleteExpenseHandler}
-        editExpense={editExpenseHandler}/>
+        deleteExpense={deleteExpenseHandler}/>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />     
     </div>
   );
 }

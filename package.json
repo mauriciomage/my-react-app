@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.2",
     "axios": "^0.21.1",
     "npm-watch": "^0.10.0",
     "react": "^17.0.2",
+    "react-confirm-alert": "^2.7.0",
     "react-dom": "^17.0.2",
-    "react-scripts": "1.1.5"
+    "react-scripts": "1.1.5",
+    "react-toastify": "^7.0.4"
   },
   "watch": {
     "build": {

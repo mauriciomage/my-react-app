@@ -6,13 +6,19 @@
   text-align: left;
 }
 
+.new-expense__control {
+  display: inline-flex;
+  width: 100%;
+}
+
 .new-expense__control label {
   font-weight: bold;
   margin-bottom: 0.5rem;
-  display: block;
+  display: block
 }
 
 .new-expense__control input {
+  display: inline-flex;
   font: inherit;
   padding: 0.5rem;
   border-radius: 6px;
