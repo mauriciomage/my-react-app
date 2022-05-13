@@ -4,7 +4,7 @@ const cors = require('cors')
 const functions = require('firebase-functions')
 
 const db = require('./db')
-const expenseRouter = require('./routes/expense-router')
+const router = require('./routes/magicprode-router')
 
 const app = express()
 const apiPort = 3001
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 }) 
 */
 
-app.use('/api', expenseRouter)
+app.use('/api', router)
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
 
